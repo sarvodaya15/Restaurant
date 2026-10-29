@@ -1,0 +1,44 @@
+packages com.rest.service;
+
+import com.rest.models.payment;
+import com.rest.payment.PaymentMethod;
+import com.rest.repository.PaymentRepository;
+import java.util.List;
+
+public class PaymentService {
+    private final PaymentRepository repository;
+    private int nextPaymentId = 1;
+
+    public PaymentService() {
+        Repository = new PaymentRepository();     
+    }
+
+    public Payment processPayment(
+        PaymentMethod method, double amount) {
+        
+    //Runtime polymorphism
+    method.pay(amount);
+
+    Payment Payment = new Payment (
+        nextPaymentId++,
+        amount,
+        method.getMethodName();
+        status: "SUCCESS");
+
+    repository.save(payment);
+    
+    return payment;
+}
+
+public List<Payment> getAllPayments() {
+    return repository.findAll();
+}
+
+public Payment getPaymentById(int id) {
+    Payment Payment = repository.findById(id);
+
+    return Payment;
+    
+}
+
+   
